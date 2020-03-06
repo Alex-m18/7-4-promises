@@ -4,11 +4,12 @@ import json from './parser';
 
 class GameSavingLoader {
   static load() {
-    // const data = read(); // возвращается Promise!
-    // const value = json(data); // возвращается Promise!
-    read().then((data) => json(data)).then((value) => {
-      const gameSaving = new GameSaving(value);
-      return gameSaving;
+    return new Promise((resolve, reject) => {
+      let parsedData;
+      read().then((data) => json(data)).then((value) => {
+        parsedData = value;
+        resolve(new GameSaving(parsedData));
+      });
     });
   }
 }

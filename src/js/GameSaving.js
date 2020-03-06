@@ -1,12 +1,13 @@
 class GameSaving {
   constructor(data) {
-    this.id = data.id;
-    this.created = data.created;
+    const saving = JSON.parse(data);
+    this.id = saving.id;
+    this.created = saving.created;
     this.userInfo = {
-      id: data.id,
-      name: data.name,
-      level: data.level,
-      points: data.points,
+      id: saving.userInfo.id,
+      name: saving.userInfo.name,
+      level: saving.userInfo.level,
+      points: saving.userInfo.points,
     };
   }
 }

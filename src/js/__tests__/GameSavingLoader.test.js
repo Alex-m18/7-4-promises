@@ -1,7 +1,8 @@
 import GameSavingLoader from '../GameSavingLoader';
+import GameSaving from '../GameSaving';
 
-test('should call our callback', async () => {
-  const expected = {
+test('should async load game saving', async () => {
+  const data = JSON.stringify({
     id: 9,
     created: 1546300800,
     userInfo: {
@@ -10,11 +11,9 @@ test('should call our callback', async () => {
       level: 10,
       points: 2000,
     },
-  };
-
-  GameSavingLoader.load().then((saving) => {
-    expect(saving).toMatchObject(expected);
-  }).catch((error) => {
-    throw new Error('error');
   });
+  const expected = new GameSaving(data);
+
+  const saving = await GameSavingLoader.load();
+  expect(saving).toEqual(expected);
 });
